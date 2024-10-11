@@ -4,6 +4,8 @@
  */
 package co.edu.cauca.event.services;
 
+import org.springframework.cloud.openfeign.FeignClient;
+
 /**
  *
  * @author Ashlee Campaz

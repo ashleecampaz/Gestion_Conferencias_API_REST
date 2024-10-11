@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Ashlee Vanessa Campaz
  */
 @Component
-public class EventService implements IEventService{
+public class EventService implements IEventServiceBasic{
     @Autowired
     IEventRepository eventAcces;
 
@@ -47,7 +47,7 @@ public class EventService implements IEventService{
         return eventAcces.save(e);
     }
 
-    @Override
+    //@Override
     @Transactional
     public void deleteById(Long id) {
         eventAcces.deleteById(id);
