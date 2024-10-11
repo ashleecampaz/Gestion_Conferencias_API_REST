@@ -40,7 +40,7 @@ public class ResearcherController {
      public Researcher create(@RequestBody Researcher event) {
      return researcherService.create(event);
      }
-     /* Get a Event by ID */
+     /* Get a researcher by ID */
      @GetMapping("/{id}")
      public Researcher getResearcherById(@PathVariable Long id) {
      return researcherService.findById(id);
