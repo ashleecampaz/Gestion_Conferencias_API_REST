@@ -4,10 +4,13 @@
  */
 package co.edu.cauca.event.services;
 
+import co.edu.cauca.event.access.IEventRepository;
 import co.edu.cauca.event.domain.Chair;
 import co.edu.cauca.event.domain.Event;
 import co.edu.cauca.event.domain.Researcher;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,9 @@ import org.springframework.stereotype.Service;
  */
 @Service("serviceFeign")
 public class IEventServiceFeign implements IEventService {
+    @Autowired
+    IEventRepository eventAcces;
+    
     @Autowired
     private IChairClientRest chairClient;
     
@@ -50,12 +56,18 @@ public class IEventServiceFeign implements IEventService {
 
     @Override
     public List<Researcher> findAllResearcher(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Event e = eventAcces.findById(id).orElse(null);
+        List<Researcher> lista = new ArrayList(); 
+        for(Researcher r: e.getComiteDeprograma()){
+            lista.add(researcherClient.detail(r.getResearcher_id()));
+        } 
+        return lista;
     }
 
     @Override
     public Chair findChair(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Event e = eventAcces.findById(id).orElse(null);
+        return chairClient.detail(e.getChair().getId());
     }
     
 }

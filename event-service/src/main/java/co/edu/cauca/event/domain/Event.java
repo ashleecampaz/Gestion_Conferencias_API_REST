@@ -50,5 +50,10 @@ public class Event implements Serializable {
     public Chair getChair(){
         return chair;
     }
+
+    public List<Researcher> getComiteDeprograma() {
+        return comiteDeprograma;
+    }
+    
     
 }

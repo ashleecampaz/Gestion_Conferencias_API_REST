@@ -5,6 +5,7 @@
 package co.edu.cauca.event.presentation;
 
 import co.edu.cauca.event.domain.Event;
+import co.edu.cauca.event.domain.Researcher;
 import co.edu.cauca.event.services.IEventService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +47,9 @@ public class EventController {
      public Event getEventById(@PathVariable Long id) {
      return eventService.findById(id);
     }
+     
+    @GetMapping("/{id}")
+     public List<Researcher> findAllResearchers(@PathVariable Long id){
+        return eventService.findAllResearcher(id);
+     }
 }
