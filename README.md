@@ -1,7 +1,11 @@
 ## Integrantes:
+
 -Lina Alexandra Diaz
+
 -Ashlee Vanessa Campaz
+
 -Andrea Realpe 
+
 -Karen Sandoval 
 
 ## Enlaces:
