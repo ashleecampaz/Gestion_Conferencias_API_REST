@@ -4,15 +4,13 @@
  */
 package co.edu.cauca.event.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+
 
 /**
  *
  * @author Ashlee Campaz
  */
-@Entity
-@Table (name = "Researcher")
+
 public class Researcher {
     
     Long Researcher_id; 

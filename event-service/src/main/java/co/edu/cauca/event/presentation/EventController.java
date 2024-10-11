@@ -45,5 +45,5 @@ public class EventController {
      @GetMapping("/{id}")
      public Event getEventById(@PathVariable Long id) {
      return eventService.findById(id);
- }
+    }
 }

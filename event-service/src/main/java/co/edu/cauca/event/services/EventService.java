@@ -47,7 +47,7 @@ public class EventService implements IEventServiceBasic{
         return eventAcces.save(e);
     }
 
-    //@Override
+    @Override
     @Transactional
     public void deleteById(Long id) {
         eventAcces.deleteById(id);
