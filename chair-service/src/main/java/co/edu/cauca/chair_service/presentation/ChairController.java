@@ -43,7 +43,7 @@ public class ChairController {
      }
      /* Get a Event by ID */
      @GetMapping("/{id}")
-     public Chair getEventById(@PathVariable Long id) {
+     public Chair getChairById(@PathVariable Long id) {
      return chairService.findById(id);
     }
 }
