@@ -4,6 +4,7 @@
  */
 package co.edu.cauca.researcher_service.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +16,7 @@ import jakarta.persistence.Table;
  * @author Ashlee Campaz
  */
 @Entity
-@Table (name = "Researcher")
+@Table (name = "researcher")
 public class Researcher {
     
     private String name;
