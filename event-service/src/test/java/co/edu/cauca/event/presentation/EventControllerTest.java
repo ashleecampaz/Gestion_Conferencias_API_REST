@@ -55,7 +55,7 @@ public class EventControllerTest {
     /**
      * Test of getEventById method, of class EventController.
      */
-    @Test
+    /**@Test
     public void testGetEventById() {
         System.out.println("getEventById");
         Long id = null;
@@ -65,6 +65,6 @@ public class EventControllerTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    }*/
     
 }

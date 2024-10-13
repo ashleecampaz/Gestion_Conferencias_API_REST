@@ -4,6 +4,7 @@
  */
 package co.edu.cauca.event.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,18 +24,15 @@ import java.util.List;
 @Table (name = "event")
 public class Event implements Serializable {
     private String name;
+    
+    
+    private Long chair_id;
+    
+    private List<Long> comiteDeprograma;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @OneToOne
-    @JoinColumn(name = "chair_id", nullable = false)
-    private Chair chair;
-    
-    @OneToMany
-    @JoinColumn(name = "researcher_id", nullable = true)
-    private List<Researcher> comiteDeprograma; 
-    
+
     public String getName() {
         return name;
     }
@@ -46,14 +44,16 @@ public class Event implements Serializable {
     public Long getId() {
         return id;
     }
-    
-    public Chair getChair(){
-        return chair;
+
+    public Long getChair_id() {
+        return chair_id;
     }
 
-    public List<Researcher> getComiteDeprograma() {
+    public List<Long> getComiteDeprograma() {
         return comiteDeprograma;
     }
+    
+    
     
     
 }

@@ -4,9 +4,11 @@
  */
 package co.edu.cauca.event.presentation;
 
+import co.edu.cauca.event.domain.Chair;
 import co.edu.cauca.event.domain.Event;
 import co.edu.cauca.event.domain.Researcher;
-import co.edu.cauca.event.services.IEventService;
+import co.edu.cauca.event.services.IEventFeignService;
+import co.edu.cauca.event.services.IEventServiceBasic;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,7 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class EventController {
     @Autowired
-    IEventService eventService;
+    IEventServiceBasic eventService;
+    @Autowired
+    IEventFeignService eventServiceFeign;
     
     @RequestMapping(method = RequestMethod.GET, produces =
     "application/json")
@@ -48,8 +52,13 @@ public class EventController {
      return eventService.findById(id);
     }
      
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/Researchers")
      public List<Researcher> findAllResearchers(@PathVariable Long id){
-        return eventService.findAllResearcher(id);
+        return eventServiceFeign.findAllResearcher(id);
+     }
+     
+     @GetMapping("/{id}/Chair")
+     public Chair findChair(@PathVariable Long id){
+        return eventServiceFeign.findChair(id);
      }
 }

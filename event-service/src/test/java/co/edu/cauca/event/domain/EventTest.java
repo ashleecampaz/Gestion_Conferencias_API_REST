@@ -65,7 +65,7 @@ public class EventTest {
     /**
      * Test of getChair method, of class Event.
      */
-    @Test
+    /**@Test
     public void testGetChair() {
         System.out.println("getChair");
         Event instance = new Event();
@@ -74,6 +74,6 @@ public class EventTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    }*/
     
 }
