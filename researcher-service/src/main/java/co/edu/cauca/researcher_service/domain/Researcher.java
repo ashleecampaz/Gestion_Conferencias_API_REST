@@ -65,7 +65,5 @@ public class Researcher {
 
     public Long getResearcher_id() {
         return researcher_id;
-    }
-    
-    
+    }  
 }
