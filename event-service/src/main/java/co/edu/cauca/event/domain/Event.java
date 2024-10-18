@@ -40,6 +40,9 @@ public class Event implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -49,6 +52,7 @@ public class Event implements Serializable {
         return chair_id;
     }
 
+    
     public List<Long> getComiteDeprograma() {
         return comiteDeprograma;
     }
