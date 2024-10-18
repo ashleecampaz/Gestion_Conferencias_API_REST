@@ -14,7 +14,8 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 
 /**
- *
+ * Pruebas unitarias para la clase EventService.
+ * 
  * @author earea
  */
 public class EventServiceTest {

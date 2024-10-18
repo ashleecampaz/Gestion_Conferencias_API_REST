@@ -1,94 +1,124 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package co.edu.cauca.chair_service.services;
 
+import co.edu.cauca.chair_service.access.IChairRepository;
 import co.edu.cauca.chair_service.domain.Chair;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.util.Arrays;
 import java.util.List;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import java.util.Optional;
 
-/**
- *
- * @author earea
- */
-public class ChairServiceTest {
-    
-    public ChairServiceTest() {
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+class ChairServiceTest {
+
+    @Mock
+    private IChairRepository chairRepository;
+
+    @InjectMocks
+    private ChairService chairService;
+
+    private Chair chair1;
+    private Chair chair2;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+
+        // Crear objetos Chair simulados
+        chair1 = new Chair();
+        chair1.setName("John");
+        chair1.setLastName("Doe");
+        chair1.setEmail("john.doe@example.com");
+
+        chair2 = new Chair();
+        chair2.setName("Jane");
+        chair2.setLastName("Smith");
+        chair2.setEmail("jane.smith@example.com");
     }
 
-    /**
-     * Test of findAll method, of class ChairService.
-     */
-    @org.junit.Test
-    public void testFindAll() {
-        System.out.println("findAll");
-        ChairService instance = new ChairService();
-        List<Chair> expResult = null;
-        List<Chair> result = instance.findAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test
+    void testFindAll() {
+        // Simular la respuesta del repositorio
+        when(chairRepository.findAll()).thenReturn(Arrays.asList(chair1, chair2));
+
+        // Ejecutar el método findAll()
+        List<Chair> result = chairService.findAll();
+
+        // Verificar que el resultado contiene las dos sillas
+        assertEquals(2, result.size());
+        assertEquals("John", result.get(0).getName());
+        assertEquals("Jane", result.get(1).getName());
+
+        // Verificar que el método findAll fue llamado una vez
+        verify(chairRepository, times(1)).findAll();
     }
 
-    /**
-     * Test of findById method, of class ChairService.
-     */
-    @org.junit.Test
-    public void testFindById() {
-        System.out.println("findById");
-        Long id = null;
-        ChairService instance = new ChairService();
-        Chair expResult = null;
-        Chair result = instance.findById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test
+    void testFindById() {
+        // Simular la respuesta del repositorio
+        when(chairRepository.findById(1L)).thenReturn(Optional.of(chair1));
+
+        // Ejecutar el método findById()
+        Chair result = chairService.findById(1L);
+
+        // Verificar que el resultado es la silla correcta
+        assertNotNull(result);
+        assertEquals("John", result.getName());
+        assertEquals("Doe", result.getLastName());
+
+        // Verificar que el método findById fue llamado una vez con el ID correcto
+        verify(chairRepository, times(1)).findById(1L);
     }
 
-    /**
-     * Test of create method, of class ChairService.
-     */
-    @org.junit.Test
-    public void testCreate() {
-        System.out.println("create");
-        Chair chair = null;
-        ChairService instance = new ChairService();
-        Chair expResult = null;
-        Chair result = instance.create(chair);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test
+    void testCreate() {
+        // Simular la respuesta del repositorio
+        when(chairRepository.save(chair1)).thenReturn(chair1);
+
+        // Ejecutar el método create()
+        Chair result = chairService.create(chair1);
+
+        // Verificar que el resultado es la silla creada
+        assertNotNull(result);
+        assertEquals("John", result.getName());
+
+        // Verificar que el método save fue llamado una vez
+        verify(chairRepository, times(1)).save(chair1);
     }
 
-    /**
-     * Test of update method, of class ChairService.
-     */
-    @org.junit.Test
-    public void testUpdate() {
-        System.out.println("update");
-        Long id = null;
-        Chair chair = null;
-        ChairService instance = new ChairService();
-        Chair expResult = null;
-        Chair result = instance.update(id, chair);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test
+    void testUpdate() {
+        // Simular la respuesta del repositorio
+        when(chairRepository.findById(1L)).thenReturn(Optional.of(chair1));
+        when(chairRepository.save(chair1)).thenReturn(chair1);
+
+        // Actualizar algunos valores
+        chair2.setName("Updated Name");
+
+        // Ejecutar el método update()
+        Chair result = chairService.update(1L, chair2);
+
+        // Verificar que el nombre fue actualizado correctamente
+        assertNotNull(result);
+        assertEquals("Updated Name", result.getName());
+
+        // Verificar que el método findById fue llamado una vez y save fue llamado para actualizar
+        verify(chairRepository, times(1)).findById(1L);
+        verify(chairRepository, times(1)).save(chair1);
     }
 
-    /**
-     * Test of deleteById method, of class ChairService.
-     */
-    @org.junit.Test
-    public void testDeleteById() {
-        System.out.println("deleteById");
-        Long id = null;
-        ChairService instance = new ChairService();
-        instance.deleteById(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test
+    void testDeleteById() {
+        // Ejecutar el método deleteById()
+        chairService.deleteById(1L);
+
+        // Verificar que el método deleteById fue llamado una vez con el ID correcto
+        verify(chairRepository, times(1)).deleteById(1L);
     }
-    
 }
